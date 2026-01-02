@@ -10,23 +10,21 @@ import main.java.mobs.FriendlyMob;
  */
 public class MobSpawner {
     private MobFactory factory;
+    private int mobsCreated = 0;
 
-    /**
-     * Конструктор принимает конкретную фабрику
-     */
     public MobSpawner(MobFactory factory) {
         this.factory = factory;
     }
 
-    /**
-     * Спавнит группу мобов для текущего измерения
-     */
     public void spawnMobGroup() {
         System.out.println("=== Спавн группы мобов ===");
 
         HostileMob hostileMob = factory.createHostileMob();
         NeutralMob neutralMob = factory.createNeutralMob();
         FriendlyMob friendlyMob = factory.createFriendlyMob();
+
+        // Увеличиваем счетчик для каждого созданного моба
+        mobsCreated += 3;
 
         hostileMob.spawn();
         hostileMob.makeSound();
@@ -40,5 +38,13 @@ public class MobSpawner {
         friendlyMob.makeSound();
 
         System.out.println();
+    }
+
+    public int getMobsCreated() {
+        return mobsCreated;
+    }
+
+    public void resetStats() {
+        mobsCreated = 0;
     }
 }
