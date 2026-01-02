@@ -12,6 +12,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== Minecraft Mob Spawner Demo ===\n");
 
+        int totalMobsFromFactories = 0;
+
         // Демонстрация спавна мобов в разных измерениях
 
         // 1. Обычный мир (Overworld)
@@ -19,51 +21,28 @@ public class Main {
         MobFactory overworldFactory = new OverworldMobFactory();
         MobSpawner overworldSpawner = new MobSpawner(overworldFactory);
         overworldSpawner.spawnMobGroup();
+        totalMobsFromFactories += overworldSpawner.getMobsCreated();
 
         // 2. Незер (Nether)
         System.out.println("2. Незер (Nether):");
         MobFactory netherFactory = new NetherMobFactory();
         MobSpawner netherSpawner = new MobSpawner(netherFactory);
         netherSpawner.spawnMobGroup();
+        totalMobsFromFactories += netherSpawner.getMobsCreated();
 
         // 3. Энд (The End)
         System.out.println("3. Энд (The End):");
         MobFactory endFactory = new EndMobFactory();
         MobSpawner endSpawner = new MobSpawner(endFactory);
         endSpawner.spawnMobGroup();
+        totalMobsFromFactories += endSpawner.getMobsCreated();
 
-        // Дополнительная демонстрация создания конкретных мобов
-        System.out.println("=== Дополнительные мобы ===");
-
-        // Создание других мобов из Overworld
-        System.out.println("\nДругие мобы Overworld:");
-        HostileMob skeleton = new main.java.mobs.overworld.Skeleton();
-        skeleton.spawn();
-        skeleton.makeSound();
-        skeleton.attack();
-
-        NeutralMob cow = new main.java.mobs.overworld.Cow();
-        cow.spawn();
-        cow.makeSound();
-        cow.dropResource();
-
-        FriendlyMob trader = new main.java.mobs.overworld.Trader();
-        trader.spawn();
-        trader.makeSound();
-
-        // Создание других мобов из Nether
-        System.out.println("\nДругие мобы Nether:");
-        HostileMob ghast = new main.java.mobs.nether.Ghast();
-        ghast.spawn();
-        ghast.makeSound();
-        ghast.attack();
-
-        // Создание других мобов из End
-        System.out.println("\nДругие мобы End:");
-        HostileMob shulker = new main.java.mobs.end.Shulker();
-        shulker.spawn();
-        shulker.makeSound();
-        shulker.attack();
+        System.out.println("\n=== Статистика создания мобов ===");
+        System.out.println("Всего создано мобов через фабрики: " + totalMobsFromFactories);
+        System.out.println("Из них:");
+        System.out.println("  - Враждебных: " + (totalMobsFromFactories / 3));
+        System.out.println("  - Нейтральных: " + (totalMobsFromFactories / 3));
+        System.out.println("  - Дружелюбных: " + (totalMobsFromFactories / 3));
 
         System.out.println("\n=== Программа завершена ===");
     }
